@@ -5,18 +5,22 @@ using System;
 
 public class AssetManager : MonoBehaviour
 {
-    private UnityEngine.Object LocalLoad(string strPath, Type type = null)
+	private string m_editorResPath = "Assets/Res/";
+	private string m_extension = ".prefab";
+
+    private UnityEngine.Object LocalLoad(string strPath, Type type)
     {
         UnityEngine.Object res = null;
 
         if (null == type)
         {
-            res = Resources.Load(strPath);
+			Debug.LogError("type is null!");
+			return null;
         }
-        else
-        {
-            res = Resources.Load(strPath, type);
-        }
+
+		strPath = m_editorResPath + strPath + m_extension;
+
+		res = UnityEditor.AssetDatabase.LoadAssetAtPath(strPath, type);
 
         if (null == res)
         {
@@ -66,7 +70,7 @@ public class AssetManager : MonoBehaviour
     public GameObject AddChildByLocal(Transform tsParent, string strPath, Vector3 vPos)
     {
         GameObject go = null;
-        UnityEngine.Object obj = this.LocalLoad(strPath);
+		UnityEngine.Object obj = this.LocalLoad(strPath, typeof(GameObject));
         if (obj)
         {
             go = obj as GameObject;
@@ -92,7 +96,7 @@ public class AssetManager : MonoBehaviour
         if (null != go && null != tsParent)
         {
             Transform ts = go.transform;
-            ts.SetParent(tsParent);
+			ts.SetParent(tsParent.transform);
             ts.localPosition = vPos;
             ts.localRotation = Quaternion.identity;
             ts.localScale = Vector3.one;
