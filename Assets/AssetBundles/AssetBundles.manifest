@@ -1,0 +1,12 @@
+ManifestFileVersion: 0
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: ui/uilogin_view.ab
+      Dependencies: {}
+    Info_1:
+      Name: ui/uimain_view.ab
+      Dependencies: {}
+    Info_2:
+      Name: ui/uitips_view.ab
+      Dependencies: {}
