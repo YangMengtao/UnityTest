@@ -28,7 +28,7 @@ public class AssetManager : MonoBehaviour
             return null;
         }
 
-        if (res is GameObject && null == type)
+        if (res is GameObject)
         {
             return Instantiate(res);
         }
